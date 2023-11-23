@@ -1,0 +1,66 @@
+body {
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.bg-light {
+  background-color: #f8f9fa; /* Bootstrap's light gray background color */
+}
+
+.container {
+  max-width: 800px;
+}
+
+#quiz-container {
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff; /* White background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light box shadow for depth */
+}
+
+button {
+  margin-top: 15px;
+}
+
+#menu-container h1 {
+  color: #007bff; /* Bootstrap's primary blue color */
+}
+
+#start-game-btn {
+  font-size: 18px;
+}
+
+#quiz-container button {
+  width: 100%; /* Make buttons full width */
+}
+
+#result-container {
+  margin-top: 20px;
+}
+
+#restart-btn,
+#back-to-menu-btn {
+  margin-top: 10px;
+}
+
+/* Centering elements */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 100% of the viewport height */
+}
+
+#quiz-container {
+  display: none;
+}
+
+#question-container img {
+  max-width: 100%; /* Ajusta a largura da imagem para não ultrapassar o contêiner */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Remove espaços em branco abaixo da imagem quando ela é exibida como um bloco */
+  margin: 0 auto; /* Centraliza a imagem horizontalmente */
+  max-height: 400px; /* Define uma altura máxima para a imagem, ajuste conforme necessário */
+}
