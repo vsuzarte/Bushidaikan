@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>Quiz de Karate - Posturas</title>
 </head>
-<body class="bg-light">
+<body>
     <div class="flex-container">
-        <!-- Menu inicial -->
-        <div id="menu-container" class="container text-center">
-            <h1 class="mb-4">Bem-vindo ao Quiz de Karate - Posturas</h1>
-            <button id="start-game-btn" class="btn btn-primary btn-lg">Iniciar Jogo</button>
+        <div id="menu-container">
+            <img src="./imagens/logo.png" />
+            <h1 class="mb-4">Bem-vindo ao Quiz Karate-Do Bushidaikan</h1>
+            <button id="start-game-btn" class="btn btn-primary btn-lg">Quiz das Posturas</button>
         </div>
 
-        <!-- Container do quiz -->
-        <div id="quiz-container" class="container mt-5">
+        <div id="quiz-container">
             <div id="question-container" class="mb-4"></div>
             <div id="options-container"></div>
             <div id="result-container" style="display: none;"></div>
@@ -25,9 +23,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="questions.js"></script>
     <script src="quiz.js"></script>
 </body>

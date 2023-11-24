@@ -90,7 +90,7 @@ function showQuestion() {
 function createOptionButton(optionName) {
     const button = document.createElement('button');
     button.innerHTML = optionName;
-    button.classList.add('btn', 'btn-primary', 'mt-3', 'option-btn');
+    button.classList.add('btn-question', 'option-btn');
     return button;
 }
 
