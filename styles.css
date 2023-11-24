@@ -17,29 +17,79 @@ body {
   max-width: 400px; /* Largura máxima do contêiner do quiz */
   box-sizing: border-box; /* Adiciona a borda à largura total */
   overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse a borda */
+  height: 100%;
 }
 
 .btn-question {
-  background-color: #3498db; /* Azul */
+  background-color: #DCDCDC; /* Verde quando passa o mouse */
+  box-shadow: 0 5px #dcdcdcde; /* Sombra verde ao passar o mouse */
+  color: black;
+  border: none;
+  font-weight: bolder;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 1em;
+}
+
+.btn-selecionado {
   color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bolder;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #58cc02; /* Verde quando passa o mouse */
+  box-shadow: 0 5px #58a700; /* Sombra verde ao passar o mouse */
+  margin-bottom: 1em;
+}
+
+.btn-selecionado:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+.btn-confirmar{
+  margin-top: 2em;
+  color: black;
+  font-weight: bolder;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 5px #2980b9; /* Sombra azul */
+  background-color: #58cc02; /* Verde quando passa o mouse */
+  box-shadow: 0 5px #58a700; /* Sombra verde ao passar o mouse */
   margin-bottom: 1em;
 }
 
-.btn-question:hover {
+.btn-continue{
+  color: black;
+  font-weight: bolder;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: blue; /* Verde quando passa o mouse */
+  box-shadow: 0 5px blue; /* Sombra verde ao passar o mouse */
+  margin-bottom: 1em;
+}
+
+.resposta-correta {
   background-color: #58cc02; /* Verde quando passa o mouse */
   box-shadow: 0 5px #58a700; /* Sombra verde ao passar o mouse */
 }
 
-.btn-question:active {
-  box-shadow: none;
-  transform: translateY(5px);
+.resposta-incorreta {
+  background-color: red; /* Verde quando passa o mouse */
+  box-shadow: 0 5px gray; /* Sombra verde ao passar o mouse */
 }
 
 
@@ -50,14 +100,6 @@ body {
   height: 100vh;
 }
 
-#question-container img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  max-height: 400px;
-}
-
 #quiz-container {
   display: none;
 }
@@ -65,7 +107,7 @@ body {
 #question-container img {
   max-width: 100%;
   max-height: 500px; /* Ajuste conforme necessário */
-  height: auto;
+  height: 350px;
   display: block;
   margin: 20px auto; /* Adicionada margem para separar a imagem do conteúdo ao redor */
   border: 2px solid #fff; /* Adicionada borda branca à imagem */
@@ -76,3 +118,24 @@ body {
   max-width: 100%;
   max-height: 300px; /* Ajuste conforme necessário */
 }
+
+.message-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.error-message {
+    color: #f44336;
+}
+
+.success-message {
+    color: #28a745;
+}
+
+.message-container img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 5px;
+}
+

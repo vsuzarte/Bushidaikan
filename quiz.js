@@ -81,31 +81,130 @@ function showQuestion() {
     const shuffledOptions = currentQuestion.sort(() => Math.random() - 0.5);
 
     shuffledOptions.forEach((option, index) => {
-        const button = createOptionButton(option.nome);
-        button.addEventListener('click', () => checkAnswer(option.isCorrect));
+        const button = createOptionButton(option.nome, option.isCorrect);
+        button.addEventListener('click', () => selectAnswer(button));
         optionsContainer.appendChild(button);
     });
+
+    // Adicione esta linha para criar um botão de confirmação
+    const confirmButton = createConfirmButton();
+    confirmButton.addEventListener('click', () => confirmAnswer());
+    optionsContainer.appendChild(confirmButton);
 }
 
-function createOptionButton(optionName) {
+function createOptionButton(optionName, isCorrect) {
     const button = document.createElement('button');
     button.innerHTML = optionName;
     button.classList.add('btn-question', 'option-btn');
+    button.dataset.isCorrect = isCorrect;
     return button;
 }
 
-function checkAnswer(isCorrect) {
-    if (isCorrect) {
-        score++;
-    }
+function createConfirmButton() {
+    const button = document.createElement('button');
+    button.innerHTML = 'Confirmar';
+    button.classList.add('btn-confirm', 'btn-confirmar');
+    return button;
+}
 
-    currentQuestionIndex++;
+function selectAnswer(clickedButton) {
+    // Remove a classe 'btn-selecionado' de todos os botões
+    const allButtons = document.querySelectorAll('.option-btn');
+    allButtons.forEach(button => {
+        button.classList.remove('btn-selecionado');
+    });
 
-    if (currentQuestionIndex < questions.length) {
-        showQuestion();
+    // Adiciona a classe 'btn-selecionado' apenas ao botão clicado
+    clickedButton.classList.add('btn-selecionado');
+}
+
+function confirmAnswer() {
+    // Encontrar todos os botões de opção
+    const allButtons = document.querySelectorAll('.option-btn');
+
+    // Desabilitar cliques nos botões após a resposta ser confirmada
+    allButtons.forEach(button => {
+        button.removeEventListener('click', () => selectAnswer(button));
+    });
+
+    // Encontrar o botão selecionado
+    const selectedButton = document.querySelector('.btn-selecionado');
+
+    if (selectedButton) {
+        // Verificar se a opção selecionada é a resposta correta
+        const isCorrect = selectedButton.dataset.isCorrect === 'true';
+
+        // Adicionar classes de estilo com base na resposta
+        if (isCorrect) {
+            console.log('Resposta correta!');
+            selectedButton.classList.add('resposta-correta');
+            showSuccessMessage();
+            showContinueButton(true);
+        } else {
+            console.log('Resposta incorreta!');
+            selectedButton.classList.add('resposta-incorreta');
+
+            // Encontrar o botão correto e destacá-lo em verde
+            const correctButton = Array.from(allButtons).find(button => button.dataset.isCorrect === 'true');
+            if (correctButton) {
+                correctButton.classList.add('resposta-correta');
+            }
+
+            showErrorMessage();
+            showContinueButton(false);
+        }
     } else {
-        endQuiz();
+        console.log('Nenhuma opção selecionada.');
+        // Adicione aqui as ações a serem realizadas se nenhuma opção estiver selecionada
     }
+}
+
+function showErrorMessage() {
+    const messageContainer = document.createElement('div');
+    messageContainer.innerHTML = `
+        <img src="./imagens/errou.png" alt="Erro">
+        <p>Ops! Você errou. Tente novamente.</p>
+    `;
+    messageContainer.classList.add('message-container', 'error-message');
+    optionsContainer.appendChild(messageContainer);
+}
+
+function showSuccessMessage() {
+    const messageContainer = document.createElement('div');
+    messageContainer.innerHTML = `
+        <img src="./imagens/acertou.png" alt="Sucesso">
+        <p>Parabéns! Você acertou!</p>
+    `;
+    messageContainer.classList.add('message-container', 'success-message');
+    optionsContainer.appendChild(messageContainer);
+}
+
+function showContinueButton(acertou) {
+    // Remover o botão de confirmação
+    const confirmButton = document.querySelector('.btn-confirm');
+    confirmButton.remove();
+
+    if(acertou)
+        score++;
+
+    // Adicionar um botão de continuar
+    const continueButton = document.createElement('button');
+    continueButton.innerHTML = 'Continuar';
+    continueButton.classList.add('btn-continue');
+
+    continueButton.addEventListener('click', () => {
+        
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            showQuestion();
+        } else {
+            endQuiz();
+        }
+            showQuestion();
+        }
+    );
+    
+    optionsContainer.appendChild(continueButton);
 }
 
 function endQuiz() {
