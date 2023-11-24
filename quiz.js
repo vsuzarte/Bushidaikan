@@ -97,6 +97,7 @@ function createOptionButton(optionName, isCorrect) {
     button.innerHTML = optionName;
     button.classList.add('btn-question', 'option-btn');
     button.dataset.isCorrect = isCorrect;
+    button.dataset.isSelected = 'false';  // Adicione esta linha para controlar se o botão foi selecionado
     return button;
 }
 
@@ -108,14 +109,16 @@ function createConfirmButton() {
 }
 
 function selectAnswer(clickedButton) {
-    // Remove a classe 'btn-selecionado' de todos os botões
+    // Remova a classe 'btn-selecionado' de todos os botões
     const allButtons = document.querySelectorAll('.option-btn');
     allButtons.forEach(button => {
         button.classList.remove('btn-selecionado');
+        button.dataset.isSelected = 'false';  // Redefina o status de seleção para falso
     });
 
-    // Adiciona a classe 'btn-selecionado' apenas ao botão clicado
+    // Adicione a classe 'btn-selecionado' apenas ao botão clicado
     clickedButton.classList.add('btn-selecionado');
+    clickedButton.dataset.isSelected = 'true';  // Marque o botão como selecionado
 }
 
 function confirmAnswer() {
@@ -125,6 +128,7 @@ function confirmAnswer() {
     // Desabilitar cliques nos botões após a resposta ser confirmada
     allButtons.forEach(button => {
         button.removeEventListener('click', () => selectAnswer(button));
+        button.disabled = true;
     });
 
     // Encontrar o botão selecionado
@@ -154,27 +158,41 @@ function confirmAnswer() {
             showContinueButton(false);
         }
     } else {
-        console.log('Nenhuma opção selecionada.');
-        // Adicione aqui as ações a serem realizadas se nenhuma opção estiver selecionada
+        allButtons.forEach(button => {
+            button.removeEventListener('click', () => selectAnswer(button));
+            button.disabled = false;
+        });
     }
 }
 
 function showErrorMessage() {
     const messageContainer = document.createElement('div');
+    
+    // Encontre a opção correta
+    const correctButton = Array.from(document.querySelectorAll('.option-btn')).find(button => button.dataset.isCorrect === 'true');
+    const correctOptionName = correctButton.innerHTML;
+
     messageContainer.innerHTML = `
         <img src="./imagens/errou.png" alt="Erro">
-        <p>Ops! Você errou. Tente novamente.</p>
+        <p>Ops! Você errou. A resposta correta é: <br> <span class="span-option">${correctOptionName}.</span><br> Tente novamente.</p>
     `;
+    
     messageContainer.classList.add('message-container', 'error-message');
     optionsContainer.appendChild(messageContainer);
 }
 
 function showSuccessMessage() {
     const messageContainer = document.createElement('div');
+    
+    // Encontre a opção correta
+    const correctButton = Array.from(document.querySelectorAll('.option-btn')).find(button => button.dataset.isCorrect === 'true');
+    const correctOptionName = correctButton.innerHTML;
+
     messageContainer.innerHTML = `
         <img src="./imagens/acertou.png" alt="Sucesso">
-        <p>Parabéns! Você acertou!</p>
+        <p>Parabéns! Você acertou a opção: <br> <span class="span-option">${correctOptionName}</span></p>
     `;
+    
     messageContainer.classList.add('message-container', 'success-message');
     optionsContainer.appendChild(messageContainer);
 }
@@ -209,9 +227,22 @@ function showContinueButton(acertou) {
 
 function endQuiz() {
     showElement('result-container');
-    resultContainer.innerHTML = `Quiz concluído! Sua pontuação: ${score}/${questions.length}`;
+
+    // Melhorar a frase
+    const scoreText = score === questions.length ? 'Parabéns! Você acertou todas as perguntas!' : `Sua pontuação: ${score}/${questions.length}. Continue praticando!`;
+    resultContainer.innerHTML = `<p>${scoreText}</p>`;
+
+    // Adicionar uma imagem
+    const image = document.createElement('img');
+    image.src = './imagens/final.png';  // Substitua pelo caminho real da sua imagem
+    image.alt = 'Imagem do resultado';
+    image.style.width = '100%';  // Ajuste o tamanho conforme necessário
+    resultContainer.appendChild(image);
+
     showElement('restart-btn');
     showElement('back-to-menu-btn');
+    hideElement('options-container');
+    hideElement('question-container');
 
     restartBtn.addEventListener('click', restartQuiz);
     backToMenuBtn.addEventListener('click', goBackToMenu);
@@ -223,12 +254,16 @@ function goBackToMenu() {
 }
 
 function restartQuiz() {
+    showElement('options-container');
+    showElement('question-container');
     hideElement('back-to-menu-btn');
     goToMainMenu();
     startGame();
 }
 
 function goToMainMenu() {
+    showElement('options-container');
+    showElement('question-container');
     showElement('menu-container');
     hideElement('quiz-container');
     hideElement('result-container');

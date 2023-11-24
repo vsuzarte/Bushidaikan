@@ -34,6 +34,11 @@ body {
   margin-bottom: 1em;
 }
 
+.btn-reiniciar{
+  background-color: orange; /* Verde quando passa o mouse */
+  box-shadow: 0 5px orange; /* Sombra verde ao passar o mouse */
+}
+
 .btn-selecionado {
   color: #fff;
   border: none;
@@ -107,7 +112,7 @@ body {
 #question-container img {
   max-width: 100%;
   max-height: 500px; /* Ajuste conforme necessário */
-  height: 350px;
+  height: 320px;
   display: block;
   margin: 20px auto; /* Adicionada margem para separar a imagem do conteúdo ao redor */
   border: 2px solid #fff; /* Adicionada borda branca à imagem */
@@ -139,3 +144,6 @@ body {
     margin-bottom: 5px;
 }
 
+.span-option{
+  color: white;
+}
