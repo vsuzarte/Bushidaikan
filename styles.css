@@ -147,3 +147,31 @@ body {
 .span-option{
   color: white;
 }
+
+#quiz-container {
+  margin: 5% auto;
+  padding: 5%;
+  max-width: 90%; /* em vez de 400px */
+}
+
+#question-container img {
+  max-height: 50vh; /* em vez de 500px */
+}
+
+#menu-container img {
+  max-height: 30vh; /* em vez de 300px */
+}
+
+@media screen and (max-width: 600px) {
+  #quiz-container {
+     max-width: 100%;
+  }
+
+  #question-container img {
+     max-height: 40vh;
+  }
+
+  #menu-container img {
+     max-height: 20vh;
+  }
+}
