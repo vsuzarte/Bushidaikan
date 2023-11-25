@@ -173,7 +173,7 @@ function showErrorMessage() {
     const correctOptionName = correctButton.innerHTML;
 
     messageContainer.innerHTML = `
-        <img src="./imagens/errou.png" alt="Erro">
+        <img src="./src/images/errou.png" alt="Erro">
         <p>Ops! Você errou. A resposta correta é: <br> <span class="span-option">${correctOptionName}.</span><br> Tente novamente.</p>
     `;
     
@@ -189,7 +189,7 @@ function showSuccessMessage() {
     const correctOptionName = correctButton.innerHTML;
 
     messageContainer.innerHTML = `
-        <img src="./imagens/acertou.png" alt="Sucesso">
+        <img src="./src/images/acertou.png" alt="Sucesso">
         <p>Parabéns! Você acertou a opção: <br> <span class="span-option">${correctOptionName}</span></p>
     `;
     
@@ -234,7 +234,7 @@ function endQuiz() {
 
     // Adicionar uma imagem
     const image = document.createElement('img');
-    image.src = './imagens/final.png';  // Substitua pelo caminho real da sua imagem
+    image.src = './src/images/final.png';  // Substitua pelo caminho real da sua imagem
     image.alt = 'Imagem do resultado';
     image.style.width = '100%';  // Ajuste o tamanho conforme necessário
     resultContainer.appendChild(image);
