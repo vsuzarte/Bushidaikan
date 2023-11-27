@@ -95,7 +95,7 @@ function showQuestion() {
 function createOptionButton(optionName, isCorrect) {
     const button = document.createElement('button');
     button.innerHTML = optionName;
-    button.classList.add('btn-question', 'option-btn');
+    button.classList.add('btn', 'option-btn', 'btn-bushi');
     button.dataset.isCorrect = isCorrect;
     button.dataset.isSelected = 'false';  // Adicione esta linha para controlar se o botão foi selecionado
     return button;
@@ -104,7 +104,7 @@ function createOptionButton(optionName, isCorrect) {
 function createConfirmButton() {
     const button = document.createElement('button');
     button.innerHTML = 'Confirmar';
-    button.classList.add('btn-confirm', 'btn-confirmar');
+    button.classList.add('btn-confirm', 'btn', 'btn-green');
     return button;
 }
 
